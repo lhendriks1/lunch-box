@@ -47,6 +47,15 @@ code {
   padding: 10px 40px;
 }
 
+.back {
+  cursor: pointer;
+  display:flex;
+  align-content: center;
+  color: #3f51b5;
+  font-size: 0.875rem;
+  letter-spacing: 0.02857em;
+}
+
 .hidden {
   display: none;
 }
@@ -72,4 +81,9 @@ div.summary-page > div.summary {
   color: black;
   position: relative;
   padding: 0;
+}
+
+.active {
+  color: darkslateblue;
+  font-weight: bold;
 }

@@ -28,13 +28,15 @@ export default function AddressForm({updateAddress, setActiveLink}) {
     }
 
     return (
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <TextField id="name" label="Name" variant="filled" required helperText='Full Name' value={address.name} onChange={e => setAddress(v => ({...v, name: e.target.value}))} />
-            <TextField id="address" label="Address" variant="filled" required  helperText='Address, City, State, Zip' value={address.address} onChange={e => setAddress(v => ({...v, address: e.target.value}))} />
+        <form className={classes.root} autoComplete="off" onSubmit={handleSubmit}>
+            <TextField id="name" label="Name" variant="filled" required value={address.name} onChange={e => setAddress(v => ({...v, name: e.target.value}))} />
+            <TextField id="address" label="Address" variant="filled" required value={address.address} onChange={e => setAddress(v => ({...v, address: e.target.value}))} />
             <TextField id="notes" label="Instructions for driver" variant="filled" value={address.notes} onChange={e => setAddress(v => ({...v, notes: e.target.value}))}/>
-            <Button type="submit" variant="contained" color="primary" className={classes.button}>
+            <div className='flex'>
+            <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={!address.name || !address.address}>
                 Review Order
             </Button>
+            </div>
         </form>
     );
 }

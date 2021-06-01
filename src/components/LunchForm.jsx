@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import SimplePaper from "./Paper";
 import AddressForm from "./AddressForm";
+import ArrowBack from '@material-ui/icons/ArrowBack';
 
 import { COSTS, DEFAULT, OPTIONS } from "../constants";
 import Summary from "./Summary";
@@ -71,8 +72,8 @@ const LunchForm = ({ lunchBox, setLunchBox, activeLink, setActiveLink, total }) 
       >
       <Divider />
         <h3>Add-Ons</h3>
-        <FormGroup row>{customizationOptions}</FormGroup>
-        <Button
+          <FormGroup row>{customizationOptions}</FormGroup>
+          <Button
           variant="contained"
           color="primary"
           onClick={() => setActiveLink(1)}
@@ -85,12 +86,14 @@ const LunchForm = ({ lunchBox, setLunchBox, activeLink, setActiveLink, total }) 
           (activeLink !== 1) && "hidden"
         }`}
       >
-        <h3>Delivery Options</h3>
-        <AddressForm updateAddress={updateAddress} setActiveLink={setActiveLink} />
+          <span onClick={() => setActiveLink(0)} className='back'><ArrowBack fontSize="small"/> BACK</span>
+          <h3>Delivery Options</h3>
+          <AddressForm updateAddress={updateAddress} setActiveLink={setActiveLink} />
       </div>
         <div
             className={`form-section summary-page ${(activeLink !== 2) && "hidden"}`}
         >
+            <span onClick={() => setActiveLink(1)} className='back'><ArrowBack fontSize="small"/> BACK</span>
             <h3>Review Your Order</h3>
             <Summary lunchBox={lunchBox} total={total}/>
             <Button variant="contained" color='primary' disabled={!lunchBox.box || !lunchBox.address.address}>Submit Order</Button>

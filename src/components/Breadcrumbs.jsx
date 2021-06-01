@@ -15,15 +15,15 @@ export default function ActiveLastBreadcrumb({
   let formattedLinks = links.map((link, i) => {
     const isActive = activeLink === i;
     return (
-      <Link
+      <p
         key={i}
         color={isActive ? "textPrimary" : "inherit"}
-        onClick={(e) => handleClick(e, i)}
+        //onClick={(e) => handleClick(e, i)}
         aria-current={isActive}
-        disabled={link === 'add-ons'}
+        className={isActive && 'active'}
       >
         {link}
-      </Link>
+      </p>
     );
   });
   return <div className='p-10'><Breadcrumbs aria-label="breadcrumb">{formattedLinks}</Breadcrumbs></div>;
