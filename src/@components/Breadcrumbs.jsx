@@ -18,9 +18,8 @@ export default function ActiveLastBreadcrumb({
       <p
         key={i}
         color={isActive ? "textPrimary" : "inherit"}
-        //onClick={(e) => handleClick(e, i)}
         aria-current={isActive}
-        className={isActive && 'active'}
+        className={isActive ? 'active' : null}
       >
         {link}
       </p>

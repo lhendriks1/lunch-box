@@ -21,30 +21,22 @@ code {
   padding: 40px;
 }
 
+.summary {
+  position: absolute;
+  bottom: 0;
+  background-color: #32408f;
+  color: white;
+  z-index: 1;
+  width: 100vw;
+  padding: 20px 40px;
+}
+
 .paper {
   margin: 10px;
 }
 
-.flex {
-  display: flex;
-}
-
 .space-between {
   justify-content: space-between;
-}
-
-.w-75 {
-  width: 75ch;
-}
-
-.summary {
-  position: absolute;
-  bottom: 0;
-  background-color: darkslateblue;
-  color: white;
-  z-index: 1;
-  width: 100vw;
-  padding: 10px 40px;
 }
 
 .back {
@@ -56,8 +48,16 @@ code {
   letter-spacing: 0.02857em;
 }
 
+.flex {
+  display: flex;
+}
+
 .hidden {
   display: none;
+}
+
+.w-75 {
+  width: 75ch;
 }
 
 .m-5 {
@@ -68,6 +68,7 @@ code {
 .p-10 {
   padding: 10px;
 }
+
 .inline {
   display: inline-block;
 }
@@ -84,6 +85,16 @@ div.summary-page > div.summary {
 }
 
 .active {
-  color: darkslateblue;
+  color: #3f51b5;
   font-weight: bold;
+}
+
+.middle {
+  margin-left: 50%;
+  margin-top: 50%;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
 }
