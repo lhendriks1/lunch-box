@@ -20,7 +20,7 @@ const LunchForm = ({ lunchBox, setLunchBox, activeLink, setActiveLink, total }) 
 
   const boxOptions = Object.values(OPTIONS).map((box) => {
     return (
-      <li role='option' onClick={() => selectBox(box.key)} key={box.key}>
+      <li onClick={() => selectBox(box.key)} key={box.key}>
         <SimplePaper selected={box.key === lunchBox.box}>
           <h4>
             {box.displayText} (${box.cost})
@@ -62,8 +62,8 @@ const LunchForm = ({ lunchBox, setLunchBox, activeLink, setActiveLink, total }) 
   return (
     <>
       <div className={`form-section ${(activeLink !== 0) ? "hidden" : null}`}>
-        <h3>Select Box</h3>
-        <ul className="flex centered" role='listbox' aria-label='meal options'>{boxOptions}</ul>
+          <h3>Select Box</h3>
+        <ul className="flex centered">{boxOptions}</ul>
       </div>
       <div
         className={`form-section ${

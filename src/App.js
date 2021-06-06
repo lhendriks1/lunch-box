@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 1500);
+    setTimeout(() => setIsLoading(false), 200);
   }, []);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function App() {
         setActiveLink={setActiveLink}
         total={total}
       />
-      {activeLink !== 2 && <div role='complementary' aria-label='order details'><Summary lunchBox={lunchBox} total={total} /></div>}
+      {activeLink !== 2 && <div><Summary lunchBox={lunchBox} total={total} /></div>}
     </div>
   );
 }

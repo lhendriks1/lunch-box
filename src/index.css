@@ -39,6 +39,10 @@ code {
   justify-content: space-between;
 }
 
+.align {
+  text-align: center;
+}
+
 .back {
   cursor: pointer;
   display:flex;
@@ -67,6 +71,10 @@ code {
 
 .p-10 {
   padding: 10px;
+}
+
+.pr-40 {
+  padding-right: 40px;
 }
 
 .inline {

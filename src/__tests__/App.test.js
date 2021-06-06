@@ -12,61 +12,30 @@ import App from "../App";
 describe("Lunch Box app", () => {
   it("renders lunch box options", async () => {
     render(<App />);
-    await waitForElementToBeRemoved(() => screen.queryByText("Loading..."), {
-      timeout: 2000,
-    });
-
-    const nav = screen.getByRole("navigation", { name: "breadcrumb" });
+    await waitForElementToBeRemoved(() => screen.queryByText("Loading..."));
+    expect(screen.getByText("Welcome to Lunch Box")).toBeVisible();
+    const nav = screen.getByRole("navigation");
     expect(within(nav).getByText("Select Box")).toHaveAttribute(
       "aria-current",
       "true"
     );
+    expect(screen.getByRole("heading", {name: /select box/i})).toBeVisible();
+    const mealOptions = screen.getByLabelText('Select Box');
+    expect(within(mealOptions).getAllByRole("option").length).toBe(2)
 
-    expect(
-      screen.getByRole("heading", { name: /select box/i })
-    ).toBeInTheDocument();
-    const mealOptions = screen.getByRole("listbox", { name: "meal options" });
-    expect(within(mealOptions).getAllByRole("option")).toHaveLength(2);
+    userEvent.click(screen.getByRole('option', {name: /pizza box/i}))
 
-    userEvent.click(screen.getByText(/Pizza Box/));
-    expect(
-      await screen.findByRole("heading", { name: "Add-Ons" })
-    ).toBeVisible();
+    //expect(screen.getByRole('heading', { name: 'Add-Ons'})).toBeVisible();
+    expect(await screen.findByRole('heading', { name: 'Add-Ons'})).toBeVisible();
+    const orderDetails = screen.getByRole('complementary', { name: 'order details'})
+    expect(orderDetails).toHaveTextContent('Total: $8.00')
+    const cauliflowerOption = screen.getByRole('checkbox', {name: /cauliflower crust/i});
+    userEvent.click(cauliflowerOption);
 
-    const extraSliceOption = screen.getByRole("checkbox", {
-      name: /extra slice \(\$4\)/i,
-    });
-    const cauliflowerOption = screen.getByRole("checkbox", {
-      name: /cauliflower crust \(\$2\)/i,
-    });
-    const extraCheeseOption = screen.getByRole("checkbox", {
-      name: /extra cheese \(\$0\.75\)/i,
-    });
+    await waitFor(() => expect(orderDetails).toHaveTextContent('Total: $10.00'));
+    userEvent.click(cauliflowerOption);
+    await waitFor(() => expect(orderDetails).toHaveTextContent('Total: $8.00'));
 
-    expect(cauliflowerOption).not.toBeChecked();
-    expect(extraSliceOption).not.toBeChecked();
-    expect(extraCheeseOption).not.toBeChecked();
-
-    const orderDetailsSection = screen.getByRole("complementary", {
-      name: "order details",
-    });
-
-    expect(orderDetailsSection).toHaveTextContent(
-      "Order Details: Pizza BoxTotal: $8.00"
-    );
-
-    userEvent.click(extraSliceOption);
-    await waitFor(() =>
-      expect(orderDetailsSection).toHaveTextContent(
-        "Order Details: Pizza Box, extra sliceTotal: $12.00"
-      )
-    );
-
-    userEvent.click(extraSliceOption);
-    await waitFor(() =>
-        expect(orderDetailsSection).toHaveTextContent(
-            "Order Details: Pizza Box, extra sliceTotal: $8.00"
-        )
-    );
+    //screen.debug();
   });
 });
