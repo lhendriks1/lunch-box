@@ -11,14 +11,15 @@ import App from "../App";
 // TODO Start by looking a package.json
 
 describe("Lunch Box app", () => {
-    it("renders lunch box options", async () => {
+    // describe("Select Box", () => {})
+    it("records order details", async () => {
         render(<App />);
+        // await screen.findByText('Welcome to Lunch Box')
 
         // wait for the removal of element(s) from the DOM -  query for the element on each DOM mutation
         await waitForElementToBeRemoved(() => screen.queryByText("Loading..."));
 
-        // Screen: Because querying the entire document.body is very common,
-        // DOM Testing Library also exports a screen object which has every query that is pre-bound to document.body
+        // Screen object has every query that is pre-bound to document.body
 
         expect(screen.getByText('Welcome to Lunch Box')).toBeVisible();
        // jest-dom matchers:  https://github.com/testing-library/jest-dom
@@ -35,13 +36,13 @@ describe("Lunch Box app", () => {
             screen.getByRole("heading", { name: /select box/i })
         ).toBeInTheDocument();
 
-        // Assert box options (pizza & pasta)..but look at plugin and see they are just divs
-        // TODO: LunchForm.jsx, ln 66 add role='listbox' aria-labelledby='selectBox', and id='selectBox' to h3;
-        //  then, ln 23 in boxOptions add role='option'
+        // TODO: LunchForm.jsx, ln 66, ul add role='listbox' aria-labelledby='selectBox', and id='selectBox' to h3;
+        //  then, ln 23 in boxOptions li add role='option'
         const mealOptions = screen.getByLabelText('Select Box');
         expect(within(mealOptions).getAllByRole("option")).toHaveLength(2);
 
-        userEvent.click(screen.getByText(/Pizza Box/));
+        // userEvent.click(screen.getByText(/Pizza Box/));
+        userEvent.click(within(mealOptions).getByRole('option', { name: /pizza box/i}))
 
         // use findBy when the element might not be there right away, findBy is a wrapper around waitFor and getBy
         // instead of expect(await waitFor(() => screen.getByRole("heading", { name: "Adds-Ons"})).toBeVisible();
