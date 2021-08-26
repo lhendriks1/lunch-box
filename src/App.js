@@ -43,7 +43,7 @@ function App() {
         setActiveLink={setActiveLink}
         total={total}
       />
-      {activeLink !== 2 && <div><Summary lunchBox={lunchBox} total={total} /></div>}
+      {activeLink !== 2 && <aside aria-label='order details'><Summary lunchBox={lunchBox} total={total} /></aside>}
     </div>
   );
 }
